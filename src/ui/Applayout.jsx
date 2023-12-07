@@ -1,10 +1,12 @@
-import { Outlet, useNavigation } from "react-router-dom";
+import { Outlet, useLocation, useNavigation } from "react-router-dom";
 import CartOverview from "../Features/cart/CartOverview";
 import Header from "./Header";
 import Loaderr from "./Loaderr";
 
 export default function Applayout() {
   const navigation = useNavigation();
+  const location = useLocation();
+  const shouldRenderABs = location.pathname==="/menu"
   const isloading = navigation.state==='loading'
   return (
     <div className="grid h-screen grid-rows-[auto_1fr_auto]">
@@ -18,7 +20,7 @@ export default function Applayout() {
         <Outlet/>
       </main>
       </div>
-      <CartOverview/>
+      {shouldRenderABs && <CartOverview/>}
     </div>
   )
 }
