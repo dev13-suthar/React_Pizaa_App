@@ -8,14 +8,15 @@ function MenuItem({ pizza }) {
   const { id, name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
   const currentQuantity = useSelector(getPizzaQuantity(id));
   const incart = currentQuantity>0;
+  const converted_Price = unitPrice*110;
   const distpatch = useDispatch ()
   const handleAddTocart = ()=>{
       const newItem = {
         pizzaId:id,
         name: name,
         quantity:1,
-        unitPrice:unitPrice,
-        totalPrice:unitPrice*1,
+        unitPrice:converted_Price,
+        totalPrice:converted_Price*1,
       }
       distpatch(addItem(newItem))
   }
@@ -27,7 +28,7 @@ function MenuItem({ pizza }) {
         <p className="font-medium">{name}</p>
         <p className="text-sm italic text-stone-500 capitalize">{ingredients.join(', ')}</p>
         <div className="mt-auto flex items-center justify-between ">
-          {!soldOut ? <p className="text-sm">{formatCurrency(unitPrice)}</p> : <p className="text-sm uppercase font-medium">Sold out</p>}
+          {!soldOut ? <p className="text-sm">{formatCurrency(converted_Price)}</p> : <p className="text-sm uppercase font-medium">Sold out</p>}
          {incart &&  
           <div className="flex items-center gap-3 sm:gap-8">
             <UpdateItemQuantity pizzaId={id} currentQuantity={currentQuantity}/>

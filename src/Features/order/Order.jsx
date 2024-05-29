@@ -53,12 +53,12 @@ function Order() {
         <p className="text-xs text-stone-500">(Estimated delivery: {formatDate(estimatedDelivery)})</p>
       </div>
       <ul className="divide-y divide-stone-200 border-b border-t">
-        {cart.map((item)=><OrderItem key={item.pizzaId} ingredients={fetcher?.data?.find(el=>el.id===item.pizzaId)?.ingredients} item={item} isLoadingIngredients={fetcher.state==="loading"}/>)}
+        {cart.map((item)=><OrderItem key={item.pizzaId}  item={item} isLoadingIngredients={fetcher.state==="loading"}/>)}
       </ul>
       <div className="space-y-2 bg-stone-200 px-6 py-5">
         <p className="text-sm font-medium text-stone-600">Price pizza: {formatCurrency(orderPrice)}</p>
         {priority && <p className="text-sm font-medium text-stone-600">Price priority: {formatCurrency(priorityPrice)}</p>}
-        <p className="font-bold">To pay on delivery: {formatCurrency(orderPrice + priorityPrice)}</p>
+        <p className="font-bold text-2xl">To pay on delivery: {formatCurrency(orderPrice + priorityPrice)}</p>
       </div>
       {!priority && <UpdateOrder order={order}/>}
     </div>
